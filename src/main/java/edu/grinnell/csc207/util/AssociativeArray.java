@@ -112,11 +112,12 @@ public class AssociativeArray<K, V> {
     }
 
     if (this.hasKey(key)) {
-      for(int i = 0; i<this.size; i++){
-        if(pairs[i].key.equals(key)){
-          pairs[i].val = value;
-          return;
-        }
+      try {
+        int index = find(key);
+        pairs[index].val = value;
+        return;
+      } catch (KeyNotFoundException e) {
+        // Do nothing: We shouldn't get an exception.
       }
     }
 
@@ -240,7 +241,11 @@ public class AssociativeArray<K, V> {
    *   If the key does not appear in the associative array.
    */
   int find(K key) throws KeyNotFoundException {
+    for(int i = 0; i < this.size; i++) {
+      if(pairs[i].key.equals(key)) {
+        return i;
+      } // if
+    } // for-loop
     throw new KeyNotFoundException();
   } // find(K)
-
 } // class AssociativeArray

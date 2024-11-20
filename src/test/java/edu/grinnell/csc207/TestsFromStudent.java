@@ -27,6 +27,13 @@ public class TestsFromStudent {
   } // alwaysPass()
 
 
+
+  /**
+   * Tests that hasKey works when trying to find character keys. It also 
+   * must return false if the key is not in the array.
+   *
+   * @throws Exception
+   */
   @Test
   public void cyphersAlexTest1() throws Exception {
     AssociativeArray<Character, Integer> alphaArray = 
@@ -41,27 +48,45 @@ public class TestsFromStudent {
     assertEquals(alphaArray.hasKey('!'), false, "M: We can't find the key if it doesn't exist.");
   } // cyphersAlexTest1()
 
-
+  /**
+   * Tests that when you use set with a key that already exists
+   * it correctly updates the value.
+   *
+   * @throws Exception
+   */
   @Test
   public void cyphersAlexTest2() throws Exception {
     AssociativeArray<String, String> aa = 
        new AssociativeArray<String, String>();
 
     aa.set("key1", "microwave");
-    aa.set("key2", "spoon");
-    aa.set("key3", "bike");
-    aa.set("key4", "pineapple");
-
     assertEquals(aa.get("key1"), "microwave", "M: We can get the value from the first key.");
+    aa.set("key1", "spoon");
+    assertEquals(aa.get("key1"), "spoon","M: We can get the new value after changing the key.");
+    aa.set("key1", "bike");
+    assertEquals(aa.get("key1"), "bike", "M: Correct value after changing the key for the second time");
     aa.remove("key1");
-    assertFalse(aa.get("key1").equals("microwave"), "M: We can't get the value from the first key after it's been removed.");
-    aa.remove("key3");
-    assertFalse(aa.get("key3").equals("bike"), "M: We can't get the value from a middle key after it's been removed.");
-    assertEquals(aa.get("key2"), "spoon", "M: We can still get a value that has not been removed");
+    aa.set("key1", "pineapple");
+    assertEquals(aa.get("key1"), "pineapple", "M: Correct value after removing and setting the key");
   } // cyphersAlexTest2()
 
-
+  
+  /**
+   * Ensures that you can't get anything from an empty array and
+   * that it will properly throw a key not found exception.
+   *
+   * @throws Exception
+   */
   @Test
   public void cyphersAlexEdge1() throws Exception {
+    AssociativeArray<Integer, Integer> aa = 
+       new AssociativeArray<Integer, Integer>();
+
+    assertThrows(KeyNotFoundException.class, () -> aa.get(1), "Throws exception trying get from empty array");
+    aa.set(1, 20);
+    assertEquals(aa.get(1), 20, "M: Check to see if set works properly has passed");
+    aa.remove(1);
+    assertThrows(KeyNotFoundException.class, () -> aa.get(1), "Throws exception after set and removal with an empty array");
+    aa.hasKey(1);
   } // cyphersAlexEdge1()
 } // class TestsFromSam

@@ -98,7 +98,7 @@ public class AssociativeArray<K, V> {
    * get(key) will return value.
    *
    * @param key
-   *   The key whose value we are seeting.
+   *   The key whose value we are setting.
    * @param value
    *   The value of that key.
    *
@@ -111,19 +111,21 @@ public class AssociativeArray<K, V> {
       throw new NullKeyException();
     }
 
+    if (this.hasKey(key)) {
+      for(int i = 0; i<this.size; i++){
+        if(pairs[i].key.equals(key)){
+          pairs[i].val = value;
+          return;
+        }
+      }
+    }
+
     if(this.size == pairs.length){
       expand();
     }
 
     pairs[this.size++] = new KVPair<>(key, value);
-
-    for(int i = 0; i<this.size; i++){
-      if(pairs[i].key.equals(key)){
-        pairs[i].val = value;
-        return;
-      }
-    }
-
+    pairs[this.size].val = value;
   } // set(K,V)
 
   /**

@@ -126,7 +126,8 @@ public class AssociativeArray<K, V> {
     }
 
     pairs[this.size++] = new KVPair<>(key, value);
-    pairs[this.size].val = value;
+    pairs[this.size - 1].key = key;
+    pairs[this.size - 1].val = value;
   } // set(K,V)
 
   /**

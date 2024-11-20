@@ -25,4 +25,29 @@ public class TestsFromStudent {
   @Test
   public void alwaysPass() throws Exception {
   } // alwaysPass()
+
+
+  @Test
+  public void cyphersAlexTest1() throws Exception {
+    AssociativeArray<Character, Integer> alphaArray = 
+        new AssociativeArray<Character, Integer>();
+    
+    for(char ch = 'a'; ch <= 'z'; ch++) {
+      alphaArray.set(ch, (int) ch);
+    } // for-loop
+    assertEquals(alphaArray.hasKey('a'), true, "M: We can find the first key if it exists.");
+    assertEquals(alphaArray.hasKey('g'), true, "M: We can find a middle key if it exists.");
+    assertEquals(alphaArray.hasKey('z'), true, "M: We can find the last key if it exists.");
+    assertEquals(alphaArray.hasKey('!'), false, "M: We can't find the key if it doesn't exist.");
+  } // cyphersAlexTest1()
+
+
+  @Test
+  public void cyphersAlexTest2() throws Exception {
+  } // cyphersAlexTest2()
+
+
+  @Test
+  public void cyphersAlexEdge1() throws Exception {
+  } // cyphersAlexEdge1()
 } // class TestsFromSam

@@ -74,8 +74,5 @@ class KVPair<K, V> {
       return this.key.toString() + ":" + this.val.toString();
     } // if
   } // toString()
-
-  
-
 } // class KVPair
 

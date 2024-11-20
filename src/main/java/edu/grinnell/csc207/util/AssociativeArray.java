@@ -68,7 +68,7 @@ public class AssociativeArray<K, V> {
         arr.set(this.pairs[i].key, this.pairs[i].val);
       } // for-loop
     } catch (NullKeyException e) {
-      //Do nothing because we are just copying the array.
+      //Do nothing because we should not recieve an exception
     } // try-catch
 
     return arr;

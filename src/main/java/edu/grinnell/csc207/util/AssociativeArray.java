@@ -68,7 +68,7 @@ public class AssociativeArray<K, V> {
         arr.set(this.pairs[i].key, this.pairs[i].val);
       } // for-loop
     } catch (NullKeyException e) {
-      System.err.println("key not found");
+      //Do nothing because we are just copying the array.
     } // try-catch
 
     return arr;
@@ -80,9 +80,26 @@ public class AssociativeArray<K, V> {
    * @return a string of the form "{Key0:Value0, Key1:Value1, ... KeyN:ValueN}"
    */
   public String toString() {
+
     String str = "";
+
     for (int i = 0; i < this.size; i++) {
-      str = str + this.pairs[i].key.toString() + ":" + this.pairs[i].val.toString() + ", ";
+      String strKey = "";
+      String strVal = "";
+
+      if (this.pairs[i].key == null) {
+        strKey = "null";
+      } else {
+        strKey = this.pairs[i].key.toString();
+      } // if/else
+
+      if (this.pairs[i].val == null) {
+        strVal = "null";
+      } else {
+        strVal = this.pairs[i].val.toString();
+      } // if/else
+
+      str = str + strKey + ":" + strVal + ", ";
     } // for-loop
 
     return "{" + str + "}";
@@ -118,15 +135,12 @@ public class AssociativeArray<K, V> {
       } catch (KeyNotFoundException e) {
         // Do nothing: We shouldn't get an exception.
       } // try-catch
-    } // if
-
-    if (this.size == pairs.length) {
-      expand();
-    } // if
-
-    pairs[this.size++] = new KVPair<>(key, value);
-    pairs[this.size - 1].key = key;
-    pairs[this.size - 1].val = value;
+    } else {
+      if (this.size == pairs.length) {
+        expand();
+      } // if
+      pairs[this.size++] = new KVPair<>(key, value);
+    } // if/else
   } // set(K,V)
 
   /**
@@ -148,7 +162,7 @@ public class AssociativeArray<K, V> {
     } // if
 
     for (int i = 0; i < this.size; i++) {
-      if (pairs[i].key == key) {
+      if (pairs[i].key.equals(key)) {
         return pairs[i].val;
       } // if
     } // for-loop
@@ -167,7 +181,7 @@ public class AssociativeArray<K, V> {
    */
   public boolean hasKey(K key) {
     for (int i = 0; i < this.size; i++) {
-      if (pairs[i].key == key) {
+      if (pairs[i].key.equals(key)) {
         return true;
       } // if
     } // for-loop
@@ -191,7 +205,7 @@ public class AssociativeArray<K, V> {
     int index = 0;
 
     for (int i = 0; i < this.size; i++) {
-      if (pairs[i].key == key) {
+      if (pairs[i].key.equals(key)) {
         index = i;
       } // if
     } // for-loop
@@ -199,9 +213,6 @@ public class AssociativeArray<K, V> {
     for (int i = index; i < this.size - 1; i++) {
       pairs[i] = pairs[i + 1];
     } // for-loop
-
-    pairs[this.size - 1].key = null;
-    pairs[this.size - 1].val = null;
 
     this.size--;
   } // remove(K)

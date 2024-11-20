@@ -64,10 +64,10 @@ public class AssociativeArray<K, V> {
   public AssociativeArray<K, V> clone() {
     AssociativeArray<K, V> arr = new AssociativeArray<>();
     try{
-      for(int i = 0; i < this.size; i++){
+      for (int i = 0; i < this.size; i++) {
         arr.set(this.pairs[i].key, this.pairs[i].val);
-     }
-    } catch (NullKeyException e){
+      }
+    } catch (NullKeyException e) {
       System.err.println("key not found");
     }
 
@@ -77,7 +77,7 @@ public class AssociativeArray<K, V> {
 
   /**
    * Convert the array to a string.
-   *
+   * 
    * @return a string of the form "{Key0:Value0, Key1:Value1, ... KeyN:ValueN}"
    */
   public String toString() {
@@ -182,6 +182,10 @@ public class AssociativeArray<K, V> {
    */
   public void remove(K key) {
 
+    if (!this.hasKey(key)) {
+      return;
+    } // if
+
     int index = 0;
     
     for(int i = 0; i < this.size; i++){
@@ -234,7 +238,7 @@ public class AssociativeArray<K, V> {
    *   If the key does not appear in the associative array.
    */
   int find(K key) throws KeyNotFoundException {
-    throw new KeyNotFoundException();   // STUB
+    throw new KeyNotFoundException();
   } // find(K)
 
 } // class AssociativeArray

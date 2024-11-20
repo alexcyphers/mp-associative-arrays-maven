@@ -32,7 +32,8 @@ class KVPair<K, V> {
    * Create an empty key/value pair.
    */
   KVPair() {
-    this(null, null);
+    this.key = null;
+    this.val = null;
   } // KVPair()
 
   /**
@@ -68,7 +69,7 @@ class KVPair<K, V> {
    */
   public String toString() {
     if (null == this.val) {
-      return this.key.toString() + ":" + "<null>";
+      return this.key.toString() + ":" + "null";
     } else {
       return this.key.toString() + ":" + this.val.toString();
     } // if

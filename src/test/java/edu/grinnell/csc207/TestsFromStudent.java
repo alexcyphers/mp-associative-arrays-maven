@@ -44,6 +44,20 @@ public class TestsFromStudent {
 
   @Test
   public void cyphersAlexTest2() throws Exception {
+    AssociativeArray<String, String> aa = 
+       new AssociativeArray<String, String>();
+
+    aa.set("key1", "microwave");
+    aa.set("key2", "spoon");
+    aa.set("key3", "bike");
+    aa.set("key4", "pineapple");
+
+    assertEquals(aa.get("key1"), "microwave", "M: We can get the value from the first key.");
+    aa.remove("key1");
+    assertFalse(aa.get("key1").equals("microwave"), "M: We can't get the value from the first key after it's been removed.");
+    aa.remove("key3");
+    assertFalse(aa.get("key3").equals("bike"), "M: We can't get the value from a middle key after it's been removed.");
+    assertEquals(aa.get("key2"), "spoon", "M: We can still get a value that has not been removed");
   } // cyphersAlexTest2()
 
 

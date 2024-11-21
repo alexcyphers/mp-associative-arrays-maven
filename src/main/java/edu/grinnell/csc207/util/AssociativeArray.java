@@ -99,7 +99,11 @@ public class AssociativeArray<K, V> {
         strVal = this.pairs[i].val.toString();
       } // if/else
 
-      str = str + strKey + ":" + strVal + ", ";
+      str = str + strKey + ":" + strVal;
+
+      if (i != this.size - 1) {
+        str = str + ", ";
+      } // if
     } // for-loop
 
     return "{" + str + "}";
